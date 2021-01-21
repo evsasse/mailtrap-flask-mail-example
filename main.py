@@ -16,9 +16,15 @@ mail = Mail(app)
 
 @app.route("/")
 def index():
-  msg = Message('Hello from the other side!', sender='peter@mailtrap.io', recipients=['paul@mailtrap.io'])
+  msg = Message('Hello from the other side!',
+                sender=('Peter from Mailtrap', 'peter@mailtrap.io'),
+                recipients=['paul@mailtrap.io'])
+
   msg.body = "Hey Paul, sending you this email from my Flask app, lmk if it works"
+  msg.html = "<strong>Hey Paul</strong>, sending you this email from my <em>Flask</em> app, lmk if it works"
+
   mail.send(msg)
+
   return "Message sent!"
 
 if __name__ == '__main__':
