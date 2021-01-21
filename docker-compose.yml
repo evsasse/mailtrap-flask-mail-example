@@ -11,3 +11,19 @@ services:
       - FLASK_ENV=development
     volumes:
       - .:/home/app
+
+  background:
+    build: .
+    env_file:
+      - .env
+    environment:
+      - FLASK_APP=main.py
+      - FLASK_ENV=development
+    volumes:
+      - .:/home/app
+    command: celery -A main.celery worker --loglevel=INFO
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
