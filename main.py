@@ -23,6 +23,9 @@ def index():
   msg.body = "Hey Paul, sending you this email from my Flask app, lmk if it works"
   msg.html = "<strong>Hey Paul</strong>, sending you this email from my <em>Flask</em> app, lmk if it works"
 
+  with app.open_resource("mailtrap.png") as file:
+      msg.attach("mailtrap.png", "image/png", file.read())
+
   mail.send(msg)
 
   return "Message sent!"
